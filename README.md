@@ -16,8 +16,18 @@ make sure static ip is set for the pi in router.
 
 get ip: `hostname -I`
 
-in `/etc/hosts` make sure this line exists:
-`192.168.1.XXX pm0X.local pm0X`
+in `/etc/hosts` remove everything and put:
+```bash
+127.0.0.1   localhost
+# Add hostname information below
+192.168.1.XX pveXX.local pveXX 
+
+::1         localhost ip6-localhost ip6-loopback
+fe00::0     ip6-localnet
+ff00::0     ip6-mcastprefix
+ff02::1     ip6-allnodes
+ff02::2     ip6-allrouters
+``` 
 
 # install ifupdown2
 
@@ -32,7 +42,16 @@ sudo apt install ifupdown2 -y`
 systemctl disable NetworkManager
 systemctl stop NetworkManager
 rm /etc/network/interfaces.net   # ok if not exists
-``` 
+```
+if correctly installed this should show the networks: `ip link show`
+
+edit `/etc/network/interfaces`
+```bash
+auto eth0
+iface eth0 inet static
+      address 192.168.1.XX/24
+      gateway 192.168.1.1
+```
 
 
 # install proxmox
