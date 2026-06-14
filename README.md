@@ -1,10 +1,13 @@
 # setup root user
 proxmox requires root user, set the Piroot password from 1pass
 ```bash
+# prebaked
 sudo passwd root
 ```
 
 # setup network
+> [!IMPORTANT]
+> IF NOT DONE FIRST INSTALLATION BRICKS!
 
 make sure static ip is set for the pi in router.
 
@@ -14,11 +17,15 @@ in `/etc/hosts` make sure this line exists:
 `192.168.1.XXX pm0X.local pm0X`
 
 # install ifupdown2
-**Not needed on the prepped image**
+
 ```bash
+# prebaked
 sudo apt update
 sudo apt upgrade -y
 sudo apt install ifupdown2 -y`
+```
+
+```bash
 systemctl disable NetworkManager
 systemctl stop NetworkManager
 rm /etc/network/interfaces.net   # ok if not exists
@@ -27,8 +34,8 @@ rm /etc/network/interfaces.net   # ok if not exists
 
 # install proxmox
 
-**prepp step not needed on the prepped image**
 ```bash
+# prebaked
 # get keys
 curl -L https://mirrors.lierfang.com/pxcloud/lierfang.gpg -o /etc/apt/trusted.gpg.d/lierfang.gpg
 sudo apt update
@@ -42,9 +49,11 @@ sudo DEBIAN_FRONTEND=noninteractive apt install -y proxmox-ve pve-manager qemu-s
 ```
 
 # install ceph
-**prepp step not needed on prepped image**
-add to `/etc/apt/sources.list.d/pxvirt-ceph.list`:
+
 ```bash
+# prebaked
+
+# add to `/etc/apt/sources.list.d/pxvirt-ceph.list`
 deb [arch=arm64] https://download.lierfang.com/pxcloud/pxvirt trixie ceph-squid
 ```
 
