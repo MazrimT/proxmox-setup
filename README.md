@@ -1,20 +1,34 @@
-# setup root user
+# Prebaked
 proxmox requires root user, set the Piroot password from 1pass
 ```bash
-# prebaked
 sudo passwd root
 ```
 
-# setup network
-> [!IMPORTANT]
-> IF NOT DONE FIRST INSTALLATION BRICKS!
->
-> make sure the IP-address gets reserved in the router!
-> make a backup of router settings just in case
+install ifupdown2
+```bash
+sudo apt install ifupdown2 -y
+```
 
-make sure static ip is set for the pi in router.
+get keys
+```bash
+sudo curl -L https://mirrors.lierfang.com/pxcloud/lierfang.gpg -o /etc/apt/trusted.gpg.d/lierfang.gpg
+```
+
+make file `/etc/apt/sources.list.d/pxvirt-sources.list`
+```bash
+deb [arch=arm64] https://mirrors.lierfang.com/pxcloud/pxvirt trixie main
+```
+
+make file `/etc/apt/sources.list.d/pxvirt-ceph.list`
+```bash
+deb [arch=arm64] https://download.lierfang.com/pxcloud/pxvirt trixie ceph-squid
+```
+
+# Node setup
 
 get ip: `hostname -I`
+make sure static ip is set for the pi in router.
+
 
 in `/etc/hosts` remove everything and put:
 ```bash
@@ -29,23 +43,7 @@ ff02::1     ip6-allnodes
 ff02::2     ip6-allrouters
 ``` 
 
-# install ifupdown2
-
-```bash
-# prebaked
-sudo apt update
-sudo apt upgrade -y
-sudo apt install ifupdown2 -y`
-```
-
-```bash
-systemctl disable NetworkManager
-systemctl stop NetworkManager
-rm /etc/network/interfaces.net   # ok if not exists
-```
-if correctly installed this should show the networks: `ip link show`
-
-edit `/etc/network/interfaces`
+in `/etc/network/interfaces` remove everything and put:
 ```bash
 auto eth0
 iface eth0 inet static
@@ -54,38 +52,21 @@ iface eth0 inet static
 ```
 
 
-# install proxmox
-
 ```bash
-# prebaked
-# get keys
-curl -L https://mirrors.lierfang.com/pxcloud/lierfang.gpg -o /etc/apt/trusted.gpg.d/lierfang.gpg
-sudo apt update
-# change trixie if new version if debian
-sudo echo "deb [arch=arm64] https://mirrors.lierfang.com/pxcloud/pxvirt trixie main">/etc/apt/sources.list.d/pxvirt-sources.list
+systemctl disable NetworkManager
+systemctl stop NetworkManager
+rm /etc/network/interfaces.net   # ok if not exists
 ```
+test before rebooting with: `ip link show`
 
-### actual install command:
+install proxmox
 ```bash
 sudo DEBIAN_FRONTEND=noninteractive apt install -y proxmox-ve pve-manager qemu-server pve-cluster
 ```
 
-# install ceph
-
-```bash
-# prebaked
-
-# add to `/etc/apt/sources.list.d/pxvirt-ceph.list`
-deb [arch=arm64] https://download.lierfang.com/pxcloud/pxvirt trixie ceph-squid
-```
-
-has to be done manually **NOT IN THE WEB UI**
+install ceph
 ```bash
 sudo apt install ceph -y
 ```
 
 
-# cloing with rpi-clone
-```bash
-rpi-clone nvme0n1 -v -U
-```
