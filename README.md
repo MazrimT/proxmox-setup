@@ -29,8 +29,11 @@ deb [arch=arm64] https://download.lierfang.com/pxcloud/pxvirt trixie ceph-squid
 get ip: `hostname -I`
 make sure static ip is set for the pi in router.
 
-
-in `/etc/hosts` remove everything and put:
+edit hosts:
+```bash
+sudo nano /etc/hosts
+```
+change it to:
 ```bash
 127.0.0.1   localhost
 # Add hostname information below
@@ -43,7 +46,11 @@ ff02::1     ip6-allnodes
 ff02::2     ip6-allrouters
 ``` 
 
-in `/etc/network/interfaces` remove everything and put:
+edit interfaces:
+```bash
+sudo nano /etc/network/interfaces
+```
+change it to:
 ```bash
 auto eth0
 iface eth0 inet static
@@ -56,7 +63,10 @@ systemctl disable NetworkManager
 systemctl stop NetworkManager
 rm /etc/network/interfaces.net   # ok if not exists
 ```
-test before rebooting with: `ip link show`
+test before rebooting with:
+```bash
+ip link show
+```
 
 change hostname with
 ```bash
