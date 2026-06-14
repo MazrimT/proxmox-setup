@@ -52,3 +52,9 @@ has to be done manually **NOT IN THE WEB UI**
 ```bash
 sudo apt install ceph -y
 ```
+
+
+# cloing with rpi-clone
+```bash
+rpi-clone nvme0n1 -v -U
+```
