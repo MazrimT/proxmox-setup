@@ -8,6 +8,9 @@ sudo passwd root
 # setup network
 > [!IMPORTANT]
 > IF NOT DONE FIRST INSTALLATION BRICKS!
+>
+> make sure the IP-address gets reserved in the router!
+> make a backup of router settings just in case
 
 make sure static ip is set for the pi in router.
 
