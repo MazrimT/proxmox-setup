@@ -51,13 +51,20 @@ iface eth0 inet static
       gateway 192.168.1.1
 ```
 
-
 ```bash
 systemctl disable NetworkManager
 systemctl stop NetworkManager
 rm /etc/network/interfaces.net   # ok if not exists
 ```
 test before rebooting with: `ip link show`
+
+change hostname with
+```bash
+sudo raspi-config
+```
+and reboot
+
+
 
 install proxmox
 ```bash
