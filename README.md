@@ -25,7 +25,7 @@ rm /etc/network/interfaces.net   # ok if not exists
 
 # install proxmox
 
-**Not needed on the prepped image**
+**prepp step not needed on the prepped image**
 ```bash
 # get keys
 curl -L https://mirrors.lierfang.com/pxcloud/lierfang.gpg -o /etc/apt/trusted.gpg.d/lierfang.gpg
@@ -34,17 +34,18 @@ sudo apt update
 sudo echo "deb [arch=arm64] https://mirrors.lierfang.com/pxcloud/pxvirt trixie main">/etc/apt/sources.list.d/pxvirt-sources.list
 ```
 
-actual install command:
+### actual install command:
 ```bash
 sudo DEBIAN_FRONTEND=noninteractive apt install -y proxmox-ve pve-manager qemu-server pve-cluster
 ```
 
 # install ceph
-**not needed on prepped image**
+**prepp step not needed on prepped image**
 add to `/etc/apt/sources.list.d/pxvirt-ceph.list`:
 ```bash
 deb [arch=arm64] https://download.lierfang.com/pxcloud/pxvirt trixie ceph-squid
 ```
+
 has to be done manually **NOT IN THE WEB UI**
 ```bash
 sudo apt install ceph -y
