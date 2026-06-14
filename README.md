@@ -64,8 +64,7 @@ install proxmox
 sudo DEBIAN_FRONTEND=noninteractive apt install -y proxmox-ve pve-manager qemu-server pve-cluster
 ```
 
-install ceph
-```bash
+make sure proxmox works, then install ceph:
 sudo apt install ceph -y
 ```
 
