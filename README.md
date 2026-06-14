@@ -1,6 +1,8 @@
 # setup root user
 proxmox requires root user, set the Piroot password from 1pass
-`sudo passwd root`
+```bash
+sudo passwd root
+```
 
 # setup network
 
