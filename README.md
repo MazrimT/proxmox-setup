@@ -22,7 +22,7 @@ rm /etc/network/interfaces.net   # ok if not exists
 ``` 
 
 
-# install
+# install proxmox
 
 
 ```bash
@@ -33,4 +33,12 @@ sudo apt update
 sudo echo "deb [arch=amd64] https://mirrors.lierfang.com/pxcloud/pxvirt trixie main">/etc/apt/sources.list.d/pxvirt-sources.list
 sudo DEBIAN_FRONTEND=noninteractive apt install -y proxmox-ve pve-manager qemu-server pve-cluster
 # yes it takes forever
+```
+
+# install ceph
+has to be done manually
+
+add to `/etc/apt/sources.list.d/pxvirt-ceph.list`:
+```bash
+deb [arch=amd64] https://download.lierfang.com/pxcloud/pxvirt trixie ceph-squid
 ```
