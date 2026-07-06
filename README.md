@@ -1,14 +1,34 @@
+# Setup Proxmox (pxvirt) on Raspberry PI 5
+
+This is none-proven way to set up Proxmox + Ceph on Raspberry PI 5's using nvme ssd's on each PI.
+
+This is all probably a horrible idea.
+
 # Setup SD-card
 
 - Install Raspberry PI 64-bit bookworm lite. NOT TRIXIE
 - use a 64GB SD-card!
+
+make sure SSD is in gen3 mode:
+add to `/boot/firmware/config.txt`
+should be directly in the "main" part, not in any section
+```bash
+dtparam=pciex1_gen=3
+
+# optionally if not using wifi or bluetooth to save a tiny bit of power
+# dtoverlay=disable-wifi 
+# dtoverlay=disable-bt
+```
+
+
+
 
 install rpi-clone
 ```bash
 curl https://raw.githubusercontent.com/geerlingguy/rpi-clone/master/install | sudo bash
 ```
 
-proxmox requires root user, up a 
+proxmox requires root user, up a password and keep it safe
 ```bash
 sudo passwd root
 ```
@@ -18,10 +38,11 @@ install ifupdown2
 sudo apt install ifupdown2 -y
 ```
 
-get keys
+get keys for pxvirt
 ```bash
 sudo curl -L https://mirrors.lierfang.com/pxcloud/lierfang.gpg -o /etc/apt/trusted.gpg.d/lierfang.gpg
 ```
+
 
 make file `/etc/apt/sources.list.d/pxvirt-sources.list`
 ```bash
@@ -42,6 +63,9 @@ and after install python3-virt-firmware:
 sudo apt update
 sudo apt install python3-virt-firmware
 ```
+
+
+
 
 # clone
 run:
