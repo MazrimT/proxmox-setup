@@ -14,12 +14,12 @@ echo "########## Wiping partitions from drive ##########"
 sudo wipefs -a /dev/nvme0n1
 
 echo "########## Setting up boot and root partitions ##########"
-sudo parted /dev/nvme0n1 --script \
+sudo parted /dev/nvme0n1 -s \
   mklabel msdos \
   mkpart primary fat32 1MiB 513MiB \
   mkpart primary ext4 513MiB 65537MiB \
   set 1 boot on
 
 echo "########## Setting up filesystem ##########"
-sudo mkfs.vfat -F 32 /dev/nvme0n1p1
-sudo mkfs.ext4 -F /dev/nvme0n1p2
+sudo mkfs.vfat -F 32 /dev/nvme0n1p1 -V
+sudo mkfs.ext4 -F /dev/nvme0n1p2 -V
