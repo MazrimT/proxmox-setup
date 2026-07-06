@@ -105,11 +105,13 @@ sudo /setup/setup_network.sh
 
 install proxmox
 ```bash
+sudo apt update
 sudo DEBIAN_FRONTEND=noninteractive apt install -y proxmox-ve pve-manager qemu-server pve-cluster
 ```
 
 make sure proxmox works, then install ceph:
 ```bash
+sudo apt update
 sudo apt install ceph -y
 ```
 
