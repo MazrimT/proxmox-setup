@@ -84,10 +84,12 @@ sudo apt install python3-virt-firmware
 # clone
 run:
 ```bash
-clone/wipe_and_partition_nvme.sh
-clone/clone.sh
+sudo clone/wipe_and_partition_nvme.sh
+sudo clone/clone.sh [new_hostname]
 ```
-give it a new hostname
+
+set what the hostname will be after cloning on the SSD. does not affect the SD-card
+
 remove sd card and reboot
 
 
