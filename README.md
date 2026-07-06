@@ -105,7 +105,7 @@ remove sd card and reboot
 
 setup network stuff
 ```bash
-sudo /setup/setup_network.sh
+sudo node_setup/setup_network.sh
 ```
 
 > [!IMPORTANT]
