@@ -4,7 +4,7 @@ HOSTNMAME=$(hostname)
 IP_ADDR=$(hostname -I | awk '{print $1}')
 
 cat > /etc/hosts <<EOF
-127.0.0.1    localhost
+127.0.0.1     localhost
 $IP_ADDR ${HOSTNAME}.local $HOSTNAME
  
 ::1         localhost ip6-localhost ip6-loopback
