@@ -1,5 +1,14 @@
-# Prebaked
-proxmox requires root user, set the Piroot password from 1pass
+# Setup SD-card
+
+- Install Raspberry PI 64-bit bookworm lite. NOT TRIXIE
+- use a 64GB SD-card!
+
+install rpi-clone
+```bash
+curl https://raw.githubusercontent.com/geerlingguy/rpi-clone/master/install | sudo bash
+```
+
+proxmox requires root user, up a 
 ```bash
 sudo passwd root
 ```
@@ -16,65 +25,43 @@ sudo curl -L https://mirrors.lierfang.com/pxcloud/lierfang.gpg -o /etc/apt/trust
 
 make file `/etc/apt/sources.list.d/pxvirt-sources.list`
 ```bash
-deb [arch=arm64] https://mirrors.lierfang.com/pxcloud/pxvirt trixie main
+deb [arch=arm64] https://mirrors.lierfang.com/pxcloud/pxvirt bookworm main
 ```
 
 make file `/etc/apt/sources.list.d/pxvirt-ceph.list`
 ```bash
-deb [arch=arm64] https://download.lierfang.com/pxcloud/pxvirt trixie ceph-squid
+deb [arch=arm64] https://download.lierfang.com/pxcloud/pxvirt bookworm ceph-squid
 ```
+
+edit `/etc/apt/sources.list` and add:
+```bash
+deb http://deb.debian.org/debian bookworm-backports main
+```
+and after install python3-virt-firmware:
+```bash
+sudo apt update
+sudo apt install python3-virt-firmware
+```
+
+# clone
+run:
+```bash
+clone/wipe_and_partition_nvme.sh
+clone/clone.sh
+```
+give it a new hostname
+remove sd card and reboot
+
 
 # Node setup
 
-get ip: `hostname -I`
-make sure static ip is set for the pi in router.
-
-edit hosts:
+setup network stuff
 ```bash
-sudo nano /etc/hosts
-```
-change it to:
-```bash
-127.0.0.1   localhost
-# Add hostname information below
-192.168.1.XX pveXX.local pveXX 
-
-::1         localhost ip6-localhost ip6-loopback
-fe00::0     ip6-localnet
-ff00::0     ip6-mcastprefix
-ff02::1     ip6-allnodes
-ff02::2     ip6-allrouters
-``` 
-
-edit interfaces:
-```bash
-sudo nano /etc/network/interfaces
-```
-change it to:
-```bash
-auto eth0
-iface eth0 inet static
-      address 192.168.1.XX/24
-      gateway 192.168.1.1
+sudo /setup/setup_network.sh
 ```
 
-```bash
-systemctl disable NetworkManager
-systemctl stop NetworkManager
-rm /etc/network/interfaces.net   # ok if not exists
-```
-test before rebooting with:
-```bash
-ip link show
-```
-
-change hostname with
-```bash
-sudo raspi-config
-```
-and reboot
-
-
+> [!IMPORTANT]
+> IP-address is now static, make sure it's reserved in router
 
 install proxmox
 ```bash
