@@ -6,6 +6,14 @@ This is all probably a horrible idea.
 
 Pull this repo any way you see fit or copy the files.
 
+# Hardware used
+5x:
+- Raspberry Pi 5 8GB
+- Waveshare POE M.2 HAT+
+- 1TB SSD
+
+Connected through MikroTikC `CSS610-8P-2S+` PoE switch.
+
 # Setup SD-card
 
 - Install Raspberry PI 64-bit bookworm lite. NOT TRIXIE
