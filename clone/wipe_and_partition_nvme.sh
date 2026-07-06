@@ -22,4 +22,4 @@ sudo parted /dev/nvme0n1 --script \
 
 echo "########## Setting up filesystem ##########"
 sudo mkfs.vfat -F 32 /dev/nvme0n1p1
-sudo mkfs.ext4 /dev/nvme0n1p2
+sudo mkfs.ext4 -F /dev/nvme0n1p2

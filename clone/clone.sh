@@ -10,4 +10,4 @@ hn=$1
 
 echo "########## Running clone to nvme with new hostname ${hn} ##########"
 
-rpi-clone nvme0n1 -s "${hn}"
+rpi-clone nvme0n1 -s "${hn}" -u -v
