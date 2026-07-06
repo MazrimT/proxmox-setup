@@ -9,6 +9,18 @@ This is all probably a horrible idea.
 - Install Raspberry PI 64-bit bookworm lite. NOT TRIXIE
 - use a 64GB SD-card!
 
+for full headless setup:
+- put an empty file `ssh` in bootfs
+- put a fille called `userconf` in bootfs containing:
+```
+username:encrypted-password
+```
+make the encrypted password:
+```
+echo 'mypassword' | openssl passwd -6 -stdin
+```
+
+
 make sure SSD is in gen3 mode:
 add to `/boot/firmware/config.txt`
 should be directly in the "main" part, not in any section
