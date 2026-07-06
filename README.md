@@ -101,7 +101,7 @@ set what the hostname will be after cloning on the SSD. does not affect the SD-c
 remove sd card and reboot
 
 
-# Node setup
+# Proxmox Node setup
 
 setup network stuff
 ```bash
@@ -117,10 +117,26 @@ sudo apt update
 sudo DEBIAN_FRONTEND=noninteractive apt install -y proxmox-ve pve-manager qemu-server pve-cluster
 ```
 
-make sure proxmox works, then install ceph:
+delete eth0 from the proxmox gui
+add new Linux Bridge.
+```bash
+IPv4/CIDR: 192.168.1.XXX/24    # whatever the IP-address is
+Gateway: 192.168.1.1           # or whatever was in the gateway is
+Autostart: check
+Bridge ports: eth0
+``` 
+Click `Apply Configuration`
+
+- Create/join cluster.
+
+# Ceph
+make sure proxmox works, then install ceph NOT THROUGH WEB GUI!
+
 ```bash
 sudo apt update
 sudo apt install ceph -y
 ```
 
+Configure in webgui.
+network: the linux bridge that was set up
 
