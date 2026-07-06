@@ -14,11 +14,15 @@ ff02::1     ip6-allnodes
 ff02::2     ip6-allrouters
 EOF
 
+default_gw="192.168.1.1"
+read -p "Set gateway (${default_gw}): " gw
+gw="${gw:-$default_gw}"
+
 cat > /etc/network/interfaces <<EOF
 auto eth0
 iface eth0 inet static
       address ${IP_ADDR}/24
-      gateway 192.168.1.1
+      gateway ${gw}
 EOF
 
 echo "########## hosts ##########"
@@ -29,7 +33,7 @@ cat /etc/network/interfaces
 echo "######### disabling network manager ########"
 systemctl disable NetworkManager
 systemctl stop NetworkManager
-rm /etc/network/interfaces.new -f   # ok if not exists
+rm /etc/network/interfaces.new -f
 
 echo "########## network setup done #########"
 ip link show

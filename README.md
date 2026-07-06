@@ -4,10 +4,12 @@ This is none-proven way to set up Proxmox + Ceph on Raspberry PI 5's using nvme 
 
 This is all probably a horrible idea.
 
+Pull this repo any way you see fit or copy the files.
+
 # Setup SD-card
 
 - Install Raspberry PI 64-bit bookworm lite. NOT TRIXIE
-- use a 64GB SD-card!
+- use maximum a 64GB SD-card! the partitioning of the drive will be 64GB for root
 
 for full headless setup:
 - put an empty file `ssh` in bootfs
