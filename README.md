@@ -43,10 +43,10 @@ display_auto_detect=0
 # make sure the pi is actively controlling the fan
 dtparam=cooling_fan=on
 # fan speed control, see below for instructions, this might need modifying
-dtparam=fan_temp0=45000,fan_temp0_hyst=5000,fan_temp0_speed=60
-dtparam=fan_temp1=55000,fan_temp1_hyst=5000,fan_temp1_speed=120
-dtparam=fan_temp2=65000,fan_temp2_hyst=5000,fan_temp2_speed=180
-dtparam=fan_temp3=75000,fan_temp3_hyst=5000,fan_temp3_speed=255
+dtparam=fan_temp0=50000,fan_temp0_hyst=8000,fan_temp0_speed=50
+dtparam=fan_temp1=60000,fan_temp1_hyst=6000,fan_temp1_speed=110
+dtparam=fan_temp2=70000,fan_temp2_hyst=5000,fan_temp2_speed=170
+dtparam=fan_temp3=80000,fan_temp3_hyst=5000,fan_temp3_speed=230
 
 # make sure we're using pciexpress gen 3 for the ssd
 dtparam=pciex1_gen=3
