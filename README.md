@@ -35,6 +35,20 @@ make sure SSD is in gen3 mode:
 add to `/boot/firmware/config.txt`
 should be directly in the "main" part, not in any section
 ```bash
+# this defaults to 1, but most likely we're not going to use a camera
+camera_auto_detect=0
+# this defaults to 1, but most likely the pi's will not have displays
+display_auto_detect=0
+
+# make sure the pi is actively controlling the fan
+dtparam=cooling_fan=on
+# fan speed control, see below for instructions, this might need modifying
+dtparam=fan_temp0=45000,fan_temp0_hyst=5000,fan_temp0_speed=60
+dtparam=fan_temp1=55000,fan_temp1_hyst=5000,fan_temp1_speed=120
+dtparam=fan_temp2=65000,fan_temp2_hyst=5000,fan_temp2_speed=180
+dtparam=fan_temp3=75000,fan_temp3_hyst=5000,fan_temp3_speed=255
+
+# make sure we're using pciexpress gen 3 for the ssd
 dtparam=pciex1_gen=3
 
 # optionally if not using wifi or bluetooth to save a tiny bit of power
@@ -42,7 +56,15 @@ dtparam=pciex1_gen=3
 # dtoverlay=disable-bt
 ```
 
-
+>[!INFORMATION]
+> Fan speed info
+> You can control up to 4 settings for fan speed based on temperature starting with 0 (so 0, 1, 2, 3)
+> fan_tempX = temperature in millicelsius (so celcius with 3x0 after)
+> fan_tempX_hyst = how much far below this to go to previous setting when comming back down in temperature
+> fan_tempX_speed = 0 to 255 where 0 is off and 255 is 100% speed.
+>
+> There is always a "hidden" 0 speed below fan_temp0 so that is the cpu temperature is `fan_temp0 - fan_temp_hyst` then fan speed is automatically set to 0.
+>
 
 
 install rpi-clone
