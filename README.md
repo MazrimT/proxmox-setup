@@ -172,3 +172,11 @@ cat /sys/class/thermal/thermal_zone0/temp
 # fan speed in rpm. 
 cat /sys/class/hwmon/hwmon*/fan1_input
 ```
+
+or run this to get it as a nice json
+```bash
+jq -n --argjson temp "$(($(cat /sys/class/thermal/thermal_zone0/temp)))" \
+      --argjson fan_rpm "$(cat /sys/class/hwmon/*/fan1_input 2>/dev/null | head -1)" \
+      --argjson fan_state "$(cat /sys/class/thermal/cooling_device0/cur_state)" \
+      '{temperature_c: ($temp / 1000), fan_rpm: $fan_rpm, fan_state: $fan_state}'
+```
