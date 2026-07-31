@@ -162,3 +162,13 @@ sudo apt install ceph -y
 Configure in webgui.
 network: the linux bridge that was set up
 
+# Monitor temperature and fan speed
+There is nothing out of the box in proxmox to monitor nodes cpu temp or fan speed.
+Can build something yourself based on the following commands:
+```bash
+# cpu temperature in millicelcius
+cat /sys/class/thermal/thermal_zone0/temp
+
+# fan speed in rpm. 
+cat /sys/class/hwmon/hwmon*/fan1_input
+```
